@@ -6,7 +6,11 @@ import Project.School.Management.repository.SchoolClassRepository;
 import Project.School.Management.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +62,7 @@ public class StudentService {
         }
         students.add((student.getFirstName() + " " + student.getLastName()));
         newSchoolClass.setStudents(students);
+        schoolClassRepository.save(newSchoolClass);
 
         // updating student
         student.setSchoolClassId(ClassId);
@@ -65,4 +70,43 @@ public class StudentService {
 
     }
 
+    public void deleteStudent(String id) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        SchoolClass schoolClass = schoolClassRepository.findById(student.getSchoolClassId()).orElseThrow(() -> new RuntimeException("SchoolClass not found"));
+        List<String> students = schoolClass.getStudents();
+        students.remove(student.getFirstName() + " " + student.getLastName());
+        schoolClass.setStudents(students);
+        schoolClassRepository.save(schoolClass);
+        studentRepository.deleteById(id);
+    }
+
+    public List<Student> getAllStudents(){
+        return studentRepository.findAll();
+    }
+
+    public Student getStudentById(String id){
+        return studentRepository.findById(id).orElseThrow(()-> new RuntimeException("Student not found"));
+    }
+
+    public void sendMedicalCertificate(String id, MultipartFile file) throws IOException {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        // Save file to directory but change the name to the student id + current date time
+        String originalFilename = file.getOriginalFilename();
+        int lastDotIndex = originalFilename.lastIndexOf(".");
+        String fileExtension = (lastDotIndex != -1) ? originalFilename.substring(lastDotIndex + 1) : "";
+
+        try {
+file.transferTo(new File("/home/ahmed/Downloads/School_management_repo/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IOException("Error saving file");
+        }
+        // Store the file path in the student object
+        if(student.getCertificatesPaths() == null) {
+            student.setCertificatesPaths(new ArrayList<>());
+        }
+        student.getCertificatesPaths().add("/home/ahmed/Downloads/School_management_repo/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png");
+        studentRepository.save(student);
+
+    }
 }

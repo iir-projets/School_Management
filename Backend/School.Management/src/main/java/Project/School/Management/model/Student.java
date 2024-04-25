@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Document(collection = "Student")
 public class Student {
@@ -17,6 +19,7 @@ public class Student {
     private String address;
     private String schoolClassId;
     private String SchoolClassName;
+    private List<String> CertificatesPaths;
 
 
 }
