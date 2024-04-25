@@ -1,146 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'student.dart';
-
-class StudentListPage extends StatefulWidget {
-  @override
-  _StudentListPageState createState() => _StudentListPageState();
+void main() {
+  runApp(MyApp());
 }
 
-class _StudentListPageState extends State<StudentListPage> {
-Future<List<dynamic>> _fetchStudents() async {
-  try {
-    final response = await http.get(Uri.parse('http://localhost:8080/student'));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      throw Exception('Failed to load students: ${response.statusCode}');
-    }
-  } catch (e) {
-    print('Error fetching students: $e');
-    throw Exception('Failed to load students');
-  }
-}
-
-Future<void> addmajor() async {
-  final response = await http.post(
-    Uri.parse('http://localhost:8080/major'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode({
-      
-    "id" : "13",
-    "name" : "finance",
-    "description" : "waaw"
-       
-      
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    print('Student added successfully');
-  } else {
-    print('Failed to add student');
-    print(response.statusCode);
-  }
-}
-
-Future<void> addschoolclass() async {
-  final response = await http.post(
-    Uri.parse('http://localhost:8080/schoolclass'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode({
-      
-    "id" : "111",
-    "year" : 3,
-    "nrClass" :5 ,
-    "className" : null,
-    "majorId": "13",
-    
-      
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    print('Student added successfully');
-  } else {
-    print('Failed to add student');
-    print(response.statusCode);
-  }
-}
-Future<void> addStudent() async {
-  final response = await http.post(
-    Uri.parse('http://localhost:8080/student'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode({
-      'id' : '1121',
-      'firstName': 'lmatii',
-      'lastName': 'abdelbarie',
-      'email': 'abdelbarie.lmati@example.com',
-      'phone': '1232456789',
-      'address': '12332 Street, City',
-      'schoolClassId' : '11111',
-      
-      
-    }),
-  );
-
-  if (response.statusCode == 200) {
-    print('Student added successfully');
-  } else {
-    print('Failed to add student');
-    print(response.statusCode);
-  }
-}
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Liste des étudiants'),
+    return MaterialApp(
+      title: 'School Management',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: _fetchStudents(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Erreur: ${snapshot.error}'));
-          } else {
-            List<dynamic> students = snapshot.data!;
-            return ListView.builder(
-              itemCount: students.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('${students[index]['firstName']} ${students[index]['lastName']}'),
-                  subtitle: Text(students[index]['email']),
-                );
-              },
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-      //     addmajor();
-      //  addschoolclass();
-          addStudent();
-        },
-        child: Icon(Icons.add),
-      ),
+      home: HomePage(),
     );
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    title: 'School Management',
-    home: StudentListPage(),
-  ));
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('School Management'),
+        backgroundColor: Colors.black38,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.account_circle),
+            onPressed: () {
+              // Add navigation to account settings
+            },
+          ),
+        ],
+      ),
+ body: Container(
+  color: Colors.black.withOpacity(0.50), 
+  child: ListView(
+    padding: EdgeInsets.all(16.0),
+    children: [
+      _buildCard('Scan QR Code to Access School', Icons.qr_code, () {
+        // Add functionality to scan QR code and access school
+      }),
+      _buildCard('School Bus', Icons.directions_bus, () {
+        // Add navigation to school bus page
+      }),
+      _buildCard('School Restaurant', Icons.restaurant, () {
+        // Add navigation to school restaurant page
+      }),
+      _buildCard('Student Portal', Icons.school, () {
+        // Add navigation to student portal page
+      }),
+      _buildCard('Medical Certificates', Icons.local_hospital, () {
+        // Add navigation to medical certificates page
+      }),
+      _buildCard('BDE Events', Icons.event, () {
+        // Add navigation to BDE events page
+      }),
+      _buildCard('Vacations', Icons.calendar_today, () {
+        // Add navigation to vacations page
+      }),
+      _buildCard('Document Requests', Icons.description, () {
+        // Add navigation to document requests page
+      }),
+      _buildCard('Profil Account', Icons.account_circle, () {
+        // Add navigation to profil account page
+      }),
+    ],
+  ),
+ ),);
+
+  }
+
+  Widget _buildCard(String title, IconData icon, VoidCallback onTap) {
+    return Card(
+      elevation: 4.0,
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+     color: Colors.cyanAccent,
+      child: ListTile(
+        contentPadding: EdgeInsets.all(16.0),
+        title: Text(
+          title,
+          style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold),
+        ),
+        leading: Icon(icon),
+        onTap: onTap,
+      ),
+    );
+  }
 }
