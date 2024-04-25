@@ -15,9 +15,8 @@ public class Student {
     private String email;
     private String phone;
     private String address;
-    private int schoolYear;
-    @DBRef
-    private SchoolClass schoolClass;
+    private String schoolClassId;
+    private String SchoolClassName;
 
 
 }
