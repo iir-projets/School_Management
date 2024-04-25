@@ -38,11 +38,11 @@ public class StudentService {
         studentRepository.insert(student);
     }
 
-    public void ChangeStudentClass(String id, String ClassId){
-        Student student = studentRepository.findById(id).orElseThrow(()-> new RuntimeException("Student not found"));
-        SchoolClass newSchoolClass = schoolClassRepository.findById(ClassId).orElseThrow(()-> new RuntimeException("SchoolClass not found"));
+    public void ChangeStudentClass(String id, String ClassId) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        SchoolClass newSchoolClass = schoolClassRepository.findById(ClassId).orElseThrow(() -> new RuntimeException("SchoolClass not found"));
         String oldSchoolClassId = student.getSchoolClassId();
-        SchoolClass oldSchoolClass = schoolClassRepository.findById(oldSchoolClassId).orElseThrow(()-> new RuntimeException("SchoolClass not found"));
+        SchoolClass oldSchoolClass = schoolClassRepository.findById(oldSchoolClassId).orElseThrow(() -> new RuntimeException("SchoolClass not found"));
 
         // Remove student from old class
         List<String> students = oldSchoolClass.getStudents();
@@ -60,8 +60,9 @@ public class StudentService {
         newSchoolClass.setStudents(students);
 
         // updating student
+        student.setSchoolClassId(ClassId);
+        studentRepository.save(student);
 
-
-
+    }
 
 }
