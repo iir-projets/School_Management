@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'portail.dart';
+import 'documentRequest.dart';
 import 'student.dart';
 void main() {
   runApp(MyApp());
@@ -68,9 +69,12 @@ class HomePage extends StatelessWidget {
       _buildCard('Vacations', Icons.calendar_today, () {
         // Add navigation to vacations page
       }),
-      _buildCard('Document Requests', Icons.description, () {
-        // Add navigation to document requests page
-      }),
+_buildCard('Document Requests', Icons.description, () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DocumentRequestPage()),
+  );
+}),
       _buildCard('Profil Account', Icons.account_circle, () {
         // Add navigation to profil account page
       }),
