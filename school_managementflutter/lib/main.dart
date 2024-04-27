@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'portail.dart';
+import 'student.dart';
 void main() {
   runApp(MyApp());
 }
+String studentId = '1';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -48,9 +52,13 @@ class HomePage extends StatelessWidget {
       _buildCard('School Restaurant', Icons.restaurant, () {
         // Add navigation to school restaurant page
       }),
-      _buildCard('Student Portal', Icons.school, () {
-        // Add navigation to student portal page
-      }),
+      
+  _buildCard('Student Portal', Icons.school, () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => StudentPortalPage(studentId)),
+  );
+}),
       _buildCard('Medical Certificates', Icons.local_hospital, () {
         // Add navigation to medical certificates page
       }),

@@ -19,17 +19,17 @@ class Student {
     required this.schoolClassName,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'phone': phone,
-      'address': address,
-      'schoolClassId': schoolClassId,
-      'schoolClassName': schoolClassName,
-    };
+  factory Student.fromJson(Map<String, dynamic> json) {
+    return Student(
+      id: json['id'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+      phone: json['phone'],
+      address: json['address'],
+      schoolClassId: json['schoolClassId'],
+      schoolClassName: json['schoolClassName'],
+    );
   }
 }
   
