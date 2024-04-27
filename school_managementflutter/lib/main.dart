@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('School Management'),
+        title: Text('School Managementtt'),
         backgroundColor: Colors.black38,
         actions: [
           IconButton(
