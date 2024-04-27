@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+
 class DetailsDocumentRequest extends StatelessWidget {
   final String firstName;
   final String lastName;
-  final String documentName;
+  final List<String> documentNames;
 
-  DetailsDocumentRequest(this.firstName, this.lastName, this.documentName);
+  DetailsDocumentRequest({
+    required this.firstName,
+    required this.lastName,
+    required this.documentNames,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +31,15 @@ class DetailsDocumentRequest extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              'Nous avons bien reçu votre demande de document : $documentName.',
+              'Nous avons bien reçu votre demande de document :',
               style: TextStyle(fontSize: 18.0),
             ),
+            for (String documentName in documentNames)
+              Text(
+                '- $documentName',
+                style: TextStyle(fontSize: 18.0),
+              ),
+              
             SizedBox(height: 20.0),
             Text(
               'Votre demande est en cours de traitement.',

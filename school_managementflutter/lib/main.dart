@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('School Managementtt'),
+        title: Text('School Management'),
         backgroundColor: Colors.black38,
         actions: [
           IconButton(
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
   child: ListView(
     padding: EdgeInsets.all(16.0),
     children: [
-      _buildCard('Scan QR Code to Access School', Icons.qr_code, () {
+      _buildCard('QR Code to Access School', Icons.qr_code, () {
         // Add functionality to scan QR code and access school
       }),
       _buildCard('School Bus', Icons.directions_bus, () {
