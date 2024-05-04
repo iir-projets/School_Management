@@ -13,6 +13,5 @@ public class Major {
     private String id;
     private String name;
     private String description;
-    @DBRef
-    private List<Subject> subjects;
+    private List<List> subjectIds;
 }

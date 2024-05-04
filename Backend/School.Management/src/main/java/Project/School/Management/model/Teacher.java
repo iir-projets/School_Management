@@ -17,8 +17,7 @@ public class Teacher {
     private String email;
     private String phone;
     private String address;
-    private List<Subject> subject;
-    @DBRef
-    private List<SchoolClass> schoolClasses;
+    private List<String> subjectIds;
+    private List<String> schoolClassesIds;
 
 }
