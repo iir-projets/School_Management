@@ -96,7 +96,7 @@ public class StudentService {
         String fileExtension = (lastDotIndex != -1) ? originalFilename.substring(lastDotIndex + 1) : "";
 
         try {
-file.transferTo(new File("/home/ahmed/Downloads/School_management_repo/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png"));
+file.transferTo(new File("/home/akashi/School_Management/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
             throw new IOException("Error saving file");
@@ -105,7 +105,7 @@ file.transferTo(new File("/home/ahmed/Downloads/School_management_repo/Backend/M
         if(student.getCertificatesPaths() == null) {
             student.setCertificatesPaths(new ArrayList<>());
         }
-        student.getCertificatesPaths().add("/home/ahmed/Downloads/School_management_repo/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png");
+        student.getCertificatesPaths().add("/home/akashi/School_Management/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png");
         studentRepository.save(student);
 
     }
