@@ -42,8 +42,8 @@ class Vacation {
 
 // Liste de vacances de démonstration
 List<Vacation> vacations = [
-  Vacation('Summer Vacation', 'July 12 - September 31'),
-  Vacation('Winter Break', 'December 20 - January 5'),
-  Vacation('spring Break', 'april 24 - May 10'),
+  Vacation('Summmer Vacation', 'July 12 - September 31'),
+  Vacation('Wiinter Break', 'December 20 - January 5'),
+  Vacation('spppring Break', 'april 24 - May 10'),
   Vacation('Spring Break', 'April 10 - April 18'),
 ];
