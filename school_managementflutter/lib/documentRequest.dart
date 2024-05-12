@@ -16,6 +16,7 @@ class DocumentRequestPage extends StatefulWidget {
 class _DocumentRequestPageState extends State<DocumentRequestPage> {
   List<String> documentNames = [];
   late String documentName='';
+  final TextEditingController documentNameController = TextEditingController();
 
   Future<Student> _fetchStudent(String studentId) async {
     try {
@@ -49,6 +50,7 @@ class _DocumentRequestPageState extends State<DocumentRequestPage> {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             TextField(
+              controller: documentNameController,
               onChanged: (value) {
                 setState(() {
                   documentName = value;
@@ -56,7 +58,7 @@ class _DocumentRequestPageState extends State<DocumentRequestPage> {
               },
               decoration: InputDecoration(
                 hintText: 'Enter document name',
-              ),
+              )
             ),
             SizedBox(height: 20.0),
             Center(
@@ -78,11 +80,12 @@ class _DocumentRequestPageState extends State<DocumentRequestPage> {
                   } else {
                     setState(() {
                       documentNames.add(documentName);
-                      documentName = '';
+                      documentNameController.clear(); // Clear the text field
+                      documentName = ''; // Clear the documentName variable
                     });
                   }
                 },
-                child: Text('Submit'),
+                child: Text('AddDocument'),
               ),
             ),
             SizedBox(height: 20.0),

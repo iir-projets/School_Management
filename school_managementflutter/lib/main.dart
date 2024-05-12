@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'portail.dart';
 import 'documentRequest.dart';
 import 'student.dart';
+import 'medicalCertifact.dart';
+import 'vacations.dart';
 void main() {
   runApp(MyApp());
 }
@@ -60,15 +62,22 @@ class HomePage extends StatelessWidget {
     MaterialPageRoute(builder: (context) => StudentPortalPage(studentId)),
   );
 }),
-      _buildCard('Medical Certificates', Icons.local_hospital, () {
-        // Add navigation to medical certificates page
-      }),
+    _buildCard('Medical Certificates', Icons.local_hospital, () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => MedicalCertificatesPage(studentId)),
+  );
+}),
+
       _buildCard('BDE Events', Icons.event, () {
         // Add navigation to BDE events page
       }),
-      _buildCard('Vacations', Icons.calendar_today, () {
-        // Add navigation to vacations page
-      }),
+_buildCard('Vacations', Icons.calendar_today, () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => VacationsPage()),
+  );
+}),
 _buildCard('Document Requests', Icons.description, () {
   Navigator.push(
     context,
