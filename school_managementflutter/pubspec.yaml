@@ -16,6 +16,7 @@ dependencies:
   mongo_dart: ^0.10.1
   http: ^1.2.1
   image_picker: ^1.1.1
+  table_calendar: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

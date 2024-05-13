@@ -4,6 +4,7 @@ import 'documentRequest.dart';
 import 'student.dart';
 import 'medicalCertifact.dart';
 import 'vacations.dart';
+import 'event.dart';
 void main() {
   runApp(MyApp());
 }
@@ -69,9 +70,13 @@ class HomePage extends StatelessWidget {
   );
 }),
 
-      _buildCard('BDE Events', Icons.event, () {
-        // Add navigation to BDE events page
-      }),
+   _buildCard('BDE Events', Icons.event, () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => BdeEventsPage()),
+  );
+}),
+
 _buildCard('Vacations', Icons.calendar_today, () {
   Navigator.push(
     context,
