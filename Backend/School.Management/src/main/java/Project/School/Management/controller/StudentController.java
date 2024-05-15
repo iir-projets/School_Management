@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/student")
 
@@ -55,6 +57,17 @@ public class StudentController {
             return ResponseEntity.badRequest().body("Medical Certificate not sent");
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity updateStudent( @PathVariable String id , @RequestBody Student student){
+        studentService.updateStudent(id,student);
+        return ResponseEntity.ok().build();
+    }
+    @GetMapping("/search/{input}")
+    public List<Student> getStudentByInput(@PathVariable String input){
+        return studentService.getStudentByInput(input);
+
+    }
+
 
 
 

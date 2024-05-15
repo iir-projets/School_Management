@@ -69,6 +69,15 @@ public class StudentService {
         studentRepository.save(student);
 
     }
+    public void updateStudent(String id,Student student){
+        Student oldStudent = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+        oldStudent.setFirstName(student.getFirstName());
+        oldStudent.setLastName(student.getLastName());
+        oldStudent.setAddress(student.getSchoolClassId());
+        oldStudent.setEmail(student.getEmail());
+        oldStudent.setSchoolClassId(student.getSchoolClassId());
+        studentRepository.save(oldStudent);
+    }
 
     public void deleteStudent(String id) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
@@ -108,5 +117,9 @@ file.transferTo(new File("/home/akashi/School_Management/Backend/MedicalCertifs/
         student.getCertificatesPaths().add("/home/akashi/School_Management/Backend/MedicalCertifs/" + student.getId() + "_" + LocalDateTime.now().withSecond(0).withNano(0) + ".png");
         studentRepository.save(student);
 
+    }
+
+    public List<Student> getStudentByInput (String input){
+        return studentRepository.findByFirstNameOrLastName(input);
     }
 }

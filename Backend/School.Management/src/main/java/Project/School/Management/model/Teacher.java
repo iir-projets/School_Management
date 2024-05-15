@@ -18,6 +18,8 @@ public class Teacher {
     private String phone;
     private String address;
     private List<String> subjectIds;
+    private List<String> subjectNames;
     private List<String> schoolClassesIds;
+    private List<String> schoolNames;
 
 }
